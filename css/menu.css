@@ -1,0 +1,20 @@
+nav ul a {
+	color: black;
+}
+
+nav ul a:hover {
+	cursor: pointer;
+	color: red;
+}
+
+nav ul li ul {
+	display: none;
+}
+
+nav ul li._selected > ul {
+	display: block;
+}
+
+li._selected > a {
+	color: green;
+}
