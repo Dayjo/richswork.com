@@ -55,25 +55,14 @@ Class Navigation {
 			foreach( self::$path_array as $part ) {
 				$parts .= $part;
 
-				echo $name . ": " . $parts . " ---- " . $path  . $name ;
-
 				if (  $parts === $path . $name  ) {
 					$selected = true;
-				}
-				/*else {
-					$selected = false;
-				}*/
-
-				echo " " . (int)$selected;
-				echo "<br />";
-				
+				}				
 			}
-
-
 
 			$html .= "<li";
 
-			$html .= ($selected ? " class='_selected' data-path='$path$name/' data-parts='$parts'" : '');
+			$html .= ($selected ? " class='_selected'" : '');
 
 			$html .= "><a " . ( empty($item['_children']) ? "href" : "data-path" ) . "='{$path}{$name}'>"
 			.  $name
