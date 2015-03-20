@@ -10,7 +10,7 @@ var menuSelect = {
 		for (var i = 0; i < nav_links.length; ++i) {
 
 			if ( !nav_links[i].href ) {
-				nav_links[i].addEventListener('click',function(){
+				nav_links[i].addEventListener('click',function(e){
 					menuSelect.select(this);
 				},false);
 			}
@@ -42,13 +42,22 @@ var menuSelect = {
 		}
 
 		// Select all parent lis
-		parent_li
+		parent_li;
+
 
 		parent_li.className = "_selected";
-	}
 
-	select_parents: function(){
-	    while (el.parentNode) {
+		if ( history.pushState ) {
+		    history.pushState(null, null, element.dataset.path);
+		}
+		else {
+		    location.hash = element.dataset.path;
+		}
+
+	},
+
+	select_parents: function(el){
+	    while (el.parentNode.tagName === "li") {
 	        el = el.parentNode;
 	        if (el.tagName === tag)
 	            return el;

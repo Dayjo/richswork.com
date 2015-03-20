@@ -1,4 +1,5 @@
 <?php
+	include "config.php";
 	include "navigation.class.php";
 ?>
 
@@ -7,13 +8,19 @@
 	<head>
 		<title><?=Navigation::current()->title;?></title>
 
-		<link rel="stylesheet" type="text/css" href="css/menu.css" />
+		<link rel="stylesheet" type="text/css" href="<?=ROOT?>/css/menu.css" />
 	</head>
 	<body>
-		<?
-			// Ouutput the UL LI structure for the menu
-			echo Navigation::menu();
+		<nav>
+			<ul>
+			<?
+				// Output the LI structure for the menu
+				echo Navigation::menu();
+			?>
+			</ul>
+		</nav>
 
+		<?
 			// Include the current page
 			Navigation::page();
 		?>
