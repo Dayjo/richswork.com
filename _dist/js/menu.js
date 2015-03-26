@@ -9,9 +9,11 @@ var menuSelect = {
 		// Loop through the anchors and add click events
 		for (var i = 0; i < nav_links.length; ++i) {
 
-			if ( !nav_links[i].href ) {
+			if ( nav_links[i].dataset.path ) {
 				nav_links[i].addEventListener('click',function(e){
 					menuSelect.select(this);
+					e.preventDefault();
+					return false;
 				},false);
 			}
 			else if ( nav_links[i].href && this.path(nav_links[i].href) === path ) {

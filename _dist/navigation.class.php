@@ -7,14 +7,18 @@ Class Navigation {
 	static $menu = [
 		// Top level
 		"films" => [
-				"url" 	=> "/films",
-				"title"	=> "",
-				"target" => "",
+			"url" 	=> "/films",
+			"title"	=> "",
+			"target" => "",
 				
 			// Second level
 			"_children" => [
 				"films" => [
-					"url" => "/films/films"
+					"url" => "/films/films",
+					"_children" => [
+						"godfather",
+						"star wars"
+					]
 				],
 				"music" => [
 				
@@ -37,7 +41,7 @@ Class Navigation {
 		]
 	];
 
-	public static function menu($menu = null, $path = "/"){
+	public static function menu($menu = null, &$path = "/"){
 		if ( !$menu ) {
 			$menu = self::$menu;
 		}
@@ -51,11 +55,13 @@ Class Navigation {
 				$name = $item;
 			}
 
+			$c_name = self::__cln($name);
+
 			$parts = ''; $selected = false;
 			foreach( self::$path_array as $part ) {
 				$parts .= $part;
 
-				if (  $parts === $path . $name  ) {
+				if (  $parts === $path . $c_name  ) {
 					$selected = true;
 				}				
 			}
@@ -63,21 +69,22 @@ Class Navigation {
 			$html .= "<li";
 
 			$html .= ($selected ? " class='_selected'" : '');
-
-			$html .= "><a " . ( empty($item['_children']) ? "href" : "data-path" ) . "='{$path}{$name}'>"
+			$href = ROOT . $path . $c_name;
+			$html .= "><a " . ( !empty($item['_children']) ? "data-path" : "" ) . "='$href' href='$href'>"
 			.  $name
 		  	. "</a>";
 			
 
 			if ( !empty($item['_children']) ) {
-				$path .=  $name . "/" ;
-
+				$path .=  $c_name . "/";
 				$html .= self::menu($item['_children'], $path);
 			}
-			
 
 			$html .= "</li>"; 
 		}
+		
+		// reset the path back a level
+		$path = dirname($path) . "/";
 
 		$html .= "</ul>";
 
@@ -99,6 +106,16 @@ Class Navigation {
 		if ( $path == self::$path ) {
 			echo 'class="_selected"';
 		}
+	}
+
+	/**
+	 * cleans the name
+	 * @param  [type] $name [description]
+	 * @return [type]       [description]
+	 */
+	private static function __cln( $name ){
+		$name = preg_replace("/[^a-zA-Z0-9]+/", "-", $name);
+		return strtolower($name);
 	}
 
 	public static function __path() {

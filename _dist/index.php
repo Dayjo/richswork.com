@@ -9,15 +9,14 @@
 		<title><?=Navigation::current()->title;?></title>
 
 		<link rel="stylesheet" type="text/css" href="<?=ROOT?>/css/menu.css" />
+		<link rel="stylesheet" type="text/css" href="<?=ROOT?>/css/style.css" />
 	</head>
 	<body>
 		<nav>
-			<ul>
 			<?
 				// Output the LI structure for the menu
 				echo Navigation::menu();
 			?>
-			</ul>
 		</nav>
 
 		<?
@@ -25,7 +24,7 @@
 			Navigation::page();
 		?>
 
-		<script src="js/menu.js" type="text/javascript"></script>
+		<script src="<?=ROOT?>/js/menu.js" type="text/javascript"></script>
 		<script type="text/javascript">menuSelect.make('nav');</script>
 	</body>
 </html>

@@ -1,5 +1,12 @@
-nav ul a {
+nav ul {
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+}
+
+nav a {
 	color: black;
+	float: left;
 }
 
 nav ul a:hover {
@@ -17,4 +24,9 @@ nav ul li._selected > ul {
 
 li._selected > a {
 	color: green;
+}
+
+nav a + ul {
+	float: left;
+	margin-right: 1em;
 }
