@@ -1,78 +1,30 @@
-<?
-	$GLOBALS['__ROOT'] = "/richswork.com";
-	include __DIR__ . "/menu.class.php";
-?>
-
-<nav id="#menu">
-	<ul>
-		<li <?=Menu::item("/films")?>>
-			<a>films</a>
-			<ul>
-				<li <?=Menu::item("/films/films")?>>
-					<a>films</a>
-				</li>
-				<li <?=Menu::item("/films/music")?>>
-					<a>music</a>
-					<ul>
-						<li <?=Menu::item("/films/music/ben-howard")?>>
-							<a href="ben-howard">ben howard</a>
-						</li>
-						<li>
-							<a href="coldplay-paradise">coldplay paradise</a>
-						</li>
-						<li <?=Menu::item("/films/music/metronmy")?>>
-							<a href="metronomy">metronomy</a>
-						</li>
-						<li>
-							<a href="keaton-hensen">keaton hensen</a>
-						</li>
-						<li>
-							<a href="delilah">delilah</a>
-						</li>
-						<li>
-							<a href="emilie-sande">emilie sande</a>
-						</li>
-						<li>
-							<a href="coldcut">coldcut</a>
-						</li>
-						<li <?=Menu::item("/films/music/sonny-j")?>>
-							<a href="sonny-j">sonny j</a>
-						</li>
-						<li>
-							<a href="gorrillaz">gorrillaz feat de la soul</a>
-						</li>
-					</ul>
-				</li>
-				<li>
-					<a>commercial</a>
-				</li>
-				<li>
-					<a>contact</a>
-				</li>
-			</ul>
-		</li>
-		<li>
-			<a>stills</a>
-			<ul>
-				<li>
-					<a>landscape</a>
-					<ul>
-						<li <?=Menu::item("/stills/landscape/beach")?>>
-							<a href="beach">beach</a>
-						</li>
-					</ul>
-				</li>
-			</ul>
-		</li>
-		<li>
-			<a>projects</a>
-		</li>
-		<li>
-			<a>art</a>
-		</li>
-		<li>
-			<a>contact</a>
-		</li>
-	</ul>
-</nav>
-
+<ul>
+	<li>
+		<a href='/richswork.com/_dist/films'>films</a>
+		<ul>
+			<li>
+				<a href='/richswork.com/_dist/films/films'>films</a>
+				<ul>
+					<li><a href='/richswork.com/_dist/films/films/godfather'>godfather</a></li>
+					<li><a href='/richswork.com/_dist/films/films/star-wars'>star wars</a></li>
+				</ul>
+			</li>
+			<li>
+				<a href='/richswork.com/_dist/films/music'>music</a>
+				<ul>
+					<li><a href='/richswork.com/_dist/films/music/ben-howard'>ben howard</a></li>
+					<li><a href='/richswork.com/_dist/films/music/coldplay-paradise'>coldplay paradise</a></li>
+					<li><a href='/richswork.com/_dist/films/music/metronomy'>metronomy</a></li>
+					<li><a href='/richswork.com/_dist/films/music/keaton-hensen'>keaton hensen</a></li>
+					<li><a href='/richswork.com/_dist/films/music/delilah'>delilah</a></li>
+					<li><a href='/richswork.com/_dist/films/music/emilie-sande'>emilie sande</a></li>
+					<li><a href='/richswork.com/_dist/films/music/coldcut'>coldcut</a></li>
+					<li><a href='/richswork.com/_dist/films/music/sonny-j'>sonny j</a></li>
+					<li><a href='/richswork.com/_dist/films/music/gorrillaz-feat-de-la-soul'>gorrillaz feat de la soul</a></li>
+				</ul>
+			</li>
+			<li><a href='/richswork.com/_dist/films/commercial'>commercial</a></li>
+			<li><a href='/richswork.com/_dist/films/contact'>contact</a></li>
+		</ul>
+	</li>
+</ul>

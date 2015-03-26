@@ -26,7 +26,7 @@ Class Navigation {
 					"_children" => [
 						"ben howard",
 						"coldplay paradise",
-						"metronomy",
+						"metronomy" => "metronomy.html",
 						"keaton hensen",
 						"delilah",
 						"emilie sande",
@@ -37,11 +37,19 @@ Class Navigation {
 				],
 				"commercial",
 				"contact",
-			]
-		]
+			] // End of second level
+		] // End of Top level
 	];
 
-	public static function menu($menu = null, &$path = "/"){
+	public static function Menu() {
+		include "menu.php";
+	}
+
+	public static function Page(){
+		echo '<script>var ROOT = "' . ROOT . '";</script>';
+	}
+
+	public static function __old_menu($menu = null, &$path = "/"){
 		if ( !$menu ) {
 			$menu = self::$menu;
 		}
@@ -96,9 +104,7 @@ Class Navigation {
 		return (object)$current;
 	}
 
-	public static function page() {
-		echo self::__path();
-	}
+	
 
 	public static function item($path) {
 		self::__path();
