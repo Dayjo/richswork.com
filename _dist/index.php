@@ -12,9 +12,7 @@
     <body>
         <a class="nav-opener" href="javascript:void(0);">OPEN</a>
         <nav>
-            <?
-            include "menu2.php"; 
-            //Navigation::Menu(); ?>
+            <? Navigation::Menu(); ?>
         </nav>
 
         <main>
