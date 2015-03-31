@@ -8,7 +8,7 @@ var menuSelect = {
 		this.nav_links = document.querySelectorAll(selector + " a");
 
 		$('.nav-opener').click(function(){
-			$('nav').css({top: 0});
+			$('nav').toggleClass('open');
 		});
 
 	    $('nav ul[data-nav-lvl="2"], nav ul[data-nav-lvl="3"]').each(function(){
