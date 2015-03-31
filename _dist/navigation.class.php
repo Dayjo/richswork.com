@@ -46,6 +46,8 @@ Class Navigation {
 	}
 
 	public static function Page(){
+		
+		include self::__cln(substr(self::__path(),1)) . ".html";
 		echo '<script>var ROOT = "' . ROOT . '";</script>';
 	}
 

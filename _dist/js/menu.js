@@ -7,20 +7,45 @@ var menuSelect = {
 		// Get the nav structure links
 		this.nav_links = document.querySelectorAll(selector + " a");
 
-		// Loop through the anchors and add click events
-		for (var i = 0; i < this.nav_links.length; ++i) {
+	    $('nav ul[data-nav-lvl="2"], nav ul[data-nav-lvl="3"]').each(function(){
+	        $(this).css({top: (-10 - $(this).height()) });
+	    });
 
-			// If I have a child list to show
-			if ( this.nav_links[i].nextElementSibling && this.nav_links[i].nextElementSibling.tagName == 'UL' ) {
+	    $('nav a').click(function(e){
+	        var nav_id = $(this).data('nav-id');
+	        var lvl = $(this).closest('[data-nav-lvl]').data('nav-lvl');
 
-				// Hijack click and use js to change history
-				this.nav_links[i].addEventListener('click',function(e){
-					menuSelect.select(this);
-					e.preventDefault();
-					return false;
-				},false);
-			}
-		}
+	        // If in the final level, it's a page
+	        if ( lvl == 3 ){
+
+	        }
+	        // There are sub menus
+			else {
+		        var $others = $('nav ul.nav-lvl-'+(lvl+1) + ', nav ul.nav-lvl-'+(lvl+2))
+		        .filter(function(){
+		        	// Don't hide current
+		        	var nav_for = $(this).data('nav-for');
+		        	if ( nav_for == nav_id ){
+		        		return false;
+		        	}
+
+		            return $(this).position().top > -$(this).height();
+		        }).each(function(){
+			        $(this).css({ opacity: 0, top: -$(this).height()});
+			    });
+
+
+	        	$('ul[data-nav-for="' + nav_id + '"]').css({
+	        	    opacity: 1, top: 0
+	        	});
+
+		        // Change the URL
+		        History.pushState(null, null, this.href);
+
+		        e.preventDefault();
+		        return false;
+		    }
+	    });
 
 		// Select the current one
 		this.select_current();
@@ -30,38 +55,46 @@ var menuSelect = {
 		path = path.substr( path.lastIndexOf("/") + 1 );
 		return path;
 	},
-	select: function(element){
-		var current_selected;
-		var parent_li = element.parentElement;
-		var child_nodes = parent_li.parentElement.childNodes;
-	
-		// Unselect any child nodes 
-		for ( var j = 0; j < child_nodes.length; ++j ) {
-			
-			if ( child_nodes[j].className == "_selected" ) {
-				current_selected = child_nodes[j];
-			}
-		}
-		if ( current_selected ) {
-			current_selected.className = "";
-		}
+	select: function(element, show){
+		//var parent_ul = element.parentElement;
+		//var child_nodes = parent_li.parentElement.childNodes;
+		
+		// Make sure this one's container is visible, and the parents 
+		$(element).closest('ul').css({top: 0, opacity: 1});
 
-		// Unselect all other _selecteds
-		var selected = this.nav.querySelectorAll("._selected");
-		for ( var i = 0; i < selected.length; ++i ){ 
-			selected[i].className = "";
-		}
+		var nav_lvl = $(element).closest('ul').data('nav-lvl');
 
-		// Select all parent lis
-		var temp_el = element;
-		var pli = null;
-		while( pli = this.parent_li(temp_el) ) {
-			pli.className = "_selected";
-			temp_el = pli;
+		if ( show != 'show' ){
+			element.click();
+		}
+		else {
+			var nav_id = $(element).data('nav-id');
+			var lvl = $(element).closest('[data-nav-lvl]').data('nav-lvl');
+
+	        // There are sub menus
+	        if ( lvl < 3 ){
+		        var $others = $('nav ul.nav-lvl-'+(lvl+1) + ', nav ul.nav-lvl-'+(lvl+2))
+		        .filter(function(){
+		        	// Don't hide current
+		        	var nav_for = $(this).data('nav-for');
+		        	if ( nav_for == nav_id ){
+		        		return false;
+		        	}
+
+		            return $(this).position().top > -$(this).height();
+		        }).each(function(){
+			        $(this).css({ opacity: 0, top: -$(this).height()});
+			    });
+
+
+	        	$('ul[data-nav-for="' + nav_id + '"]').css({
+	        	    opacity: 1, top: 0
+	        	});
+		    }
 		}
 
 		// Change the URL
-	    History.pushState(null, null, element.href);
+	    //History.pushState(null, null, element.href);
 
 	},
 
@@ -75,17 +108,36 @@ var menuSelect = {
 	},
 
 	select_current: function( path ){
+		var href;
+
 		if ( typeof	path == "undefined" ) { 
 			path = window.location.pathname.replace(ROOT,'');
 		}
 
+		var xpath = ROOT;
+		var parts = path.substr(1).split("/");
 
+		for ( var i in parts ) {
+			xpath += "/" + parts[i];
+
+			if ( i < parts.length ) {
+				// Loop through the anchors and select whichever one is the current
+				for (var i = 0; i < this.nav_links.length; ++i) {
+					href = this.nav_links[i].getAttribute('href');
+
+					if ( href && href === xpath ) {
+						menuSelect.select(this.nav_links[i], 'show');
+					}
+				}
+			}
+		}
 
 		// Loop through the anchors and select whichever one is the current
-		for (var i = 0; i < this.nav_links.length; ++i) {
-			console.log(this.nav_links[i].href + " > " + ROOT + path );
-			if ( this.nav_links[i].href && this.nav_links[i].href === ROOT + path ) {
-				menuSelect.select(this.nav_links[i]);
+		for (i = 0; i < this.nav_links.length; ++i) {
+			href = this.nav_links[i].getAttribute('href');
+
+			if ( href && href === ROOT + path ) {
+				menuSelect.select(this.nav_links[i],'show');
 			}
 		}
 	}
@@ -97,9 +149,7 @@ var menuSelect = {
     History.Adapter.bind(window,'statechange',function(){ // Note: We are using statechange instead of popstate
         var State = History.getState(); // Note: We are using History.getState() instead of event.state
         var reg = new RegExp("/" + ROOT + "/");
-        console.log(State.hash.replace(ROOT,''));
 		menuSelect.select_current(State.hash.replace(ROOT,''));
     });
-
 
 })(window);
