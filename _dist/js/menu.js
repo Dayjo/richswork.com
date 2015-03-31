@@ -95,10 +95,7 @@ var menuSelect = {
 	        	    opacity: 1, top: 0
 	        	});
 		    }
-		    else {
-		    	$(element).addClass('_selected');
-		    	console.log(element);
-		    }
+		    $(element).addClass('_selected');
 		}
 
 		// Change the URL
