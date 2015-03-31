@@ -95,6 +95,8 @@ var menuSelect = {
 	        	    opacity: 1, top: 0
 	        	});
 		    }
+
+		    $(element).closest('ul').find('a._selected').removeClass('_selected');
 		    $(element).addClass('_selected');
 		}
 
