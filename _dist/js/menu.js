@@ -21,7 +21,7 @@ var menuSelect = {
 
 	        // If in the final level, it's a page
 	        if ( lvl == 3 ){
-
+	        	$(this).addClass('_selected');
 	        }
 	        // There are sub menus
 			else {
@@ -94,6 +94,10 @@ var menuSelect = {
 	        	$('ul[data-nav-for="' + nav_id + '"]').css({
 	        	    opacity: 1, top: 0
 	        	});
+		    }
+		    else {
+		    	$(element).addClass('_selected');
+		    	console.log(element);
 		    }
 		}
 
