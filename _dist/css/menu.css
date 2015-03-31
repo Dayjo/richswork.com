@@ -31,8 +31,6 @@ nav a {
 	float: left;
 }
 
-
-
 nav ul.nav-lvl-2, nav ul.nav-lvl-3 {
 	position: absolute;
 	opacity: 0;
@@ -44,28 +42,7 @@ nav ul.nav-lvl-2 {
 	left: 150px;
 }
 
-nav ul a:hover {
-	cursor: pointer;
-	color: red;
-}
-
-nav ul li ul {
-	display: none;
-}
 
 nav ul li {
 	overflow: hidden;
-}
-nav ul li._selected > ul {
-	display: block;
-	transition: top 300ms cubic-bezier(0.17, 0.04, 0.03, 0.94);
-}
-
-li._selected > a {
-	color: green;
-}
-
-nav a + ul {
-	float: left;
-	margin-right: 1em;
 }

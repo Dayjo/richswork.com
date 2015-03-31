@@ -4,50 +4,21 @@ Class Navigation {
 	static $path;
 	static $path_array;
 
-	static $menu = [
-		// Top level
-		"films" => [
-			"url" 	=> "/films",
-			"title"	=> "",
-			"target" => "",
-				
-			// Second level
-			"_children" => [
-				"films" => [
-					"url" => "/films/films",
-					"_children" => [
-						"godfather",
-						"star wars"
-					]
-				],
-				"music" => [
-				
-				// Third Level
-					"_children" => [
-						"ben howard",
-						"coldplay paradise",
-						"metronomy" => "metronomy.html",
-						"keaton hensen",
-						"delilah",
-						"emilie sande",
-						"coldcut",
-						"sonny j",
-						"gorrillaz feat de la soul",
-					]
-				],
-				"commercial",
-				"contact",
-			] // End of second level
-		] // End of Top level
-	];
-
 	public static function Menu() {
 		include "menu.php";
 	}
 
 	public static function Page(){
 		
-		include self::__cln(substr(self::__path(),1)) . ".html";
+		$page_file = "content/" . self::__cln(substr(self::__path(),1)) . ".html";
+
+		if ( file_exists($page_file) ) {
+			include $page_file;
+		}
+		else {
+			include 'content/default.html';
+		}
+
 		echo '<script>var ROOT = "' . ROOT . '";</script>';
 	}
 
@@ -140,4 +111,41 @@ Class Navigation {
 		return self::$path;
 	}
 
+
+	static $menu = [
+		// Top level
+		"films" => [
+			"url" 	=> "/films",
+			"title"	=> "",
+			"target" => "",
+				
+			// Second level
+			"_children" => [
+				"films" => [
+					"url" => "/films/films",
+					"_children" => [
+						"godfather",
+						"star wars"
+					]
+				],
+				"music" => [
+				
+				// Third Level
+					"_children" => [
+						"ben howard",
+						"coldplay paradise",
+						"metronomy" => "metronomy.html",
+						"keaton hensen",
+						"delilah",
+						"emilie sande",
+						"coldcut",
+						"sonny j",
+						"gorrillaz feat de la soul",
+					]
+				],
+				"commercial",
+				"contact",
+			] // End of second level
+		] // End of Top level
+	];
 }

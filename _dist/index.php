@@ -17,7 +17,6 @@
         </nav>
 
         <main>
-        Hello World
         	<? Navigation::Page(); ?>
         </main>
 
