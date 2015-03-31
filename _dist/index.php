@@ -10,6 +10,7 @@
         <link rel="stylesheet" type="text/css" href="<?=ROOT?>/css/style.css" />
     </head>
     <body>
+        <a class="nav-opener" href="javascript:void(0);">OPEN</a>
         <nav>
             <?
             include "menu2.php"; 

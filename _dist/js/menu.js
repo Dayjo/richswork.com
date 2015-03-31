@@ -7,6 +7,10 @@ var menuSelect = {
 		// Get the nav structure links
 		this.nav_links = document.querySelectorAll(selector + " a");
 
+		$('.nav-opener').click(function(){
+			$('nav').css({top: 0});
+		});
+
 	    $('nav ul[data-nav-lvl="2"], nav ul[data-nav-lvl="3"]').each(function(){
 	        $(this).css({top: (-10 - $(this).height()) });
 	    });
