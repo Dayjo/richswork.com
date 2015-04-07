@@ -19,12 +19,8 @@ var menuSelect = {
 	        var nav_id = $(this).data('nav-id');
 	        var lvl = $(this).closest('[data-nav-lvl]').data('nav-lvl');
 
-	        // If in the final level, it's a page
-	        if ( lvl == 3 ){
-	        	$(this).addClass('_selected');
-	        }
-	        // There are sub menus
-			else {
+	        // If there's a sub menu (otherwise just go to the link)
+	        if ( nav_id ){
 		        var $others = $('nav ul.nav-lvl-'+(lvl+1) + ', nav ul.nav-lvl-'+(lvl+2))
 		        .filter(function(){
 		        	// Don't hide current
