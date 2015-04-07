@@ -52,10 +52,6 @@
 <li><a href='/site/art/installation'>installation</a></li>
 </ul>
 
-
-
-
-
 <ul class="nav-lvl-3" data-nav-lvl="3" data-nav-for="films/films">
 	<li><a href='/site/films/films/the-possibilities-are-endless'>the possibilities are endless</a></li>
 	<li><a href='/site/films/films/powers-of-three'>powers of three</a></li>

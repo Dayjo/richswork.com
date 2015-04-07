@@ -21,6 +21,8 @@ var menuSelect = {
 
 	        // If there's a sub menu (otherwise just go to the link)
 	        if ( nav_id ){
+
+	        	// Hide all of the sub menus not relating to this one
 		        var $others = $('nav ul.nav-lvl-'+(lvl+1) + ', nav ul.nav-lvl-'+(lvl+2))
 		        .filter(function(){
 		        	// Don't hide current
@@ -30,10 +32,11 @@ var menuSelect = {
 		        	}
 
 		            return $(this).position().top > -$(this).height();
-		        }).each(function(){
+		        })
+		        .each(function(){
 			        $(this).css({ opacity: 0, top: -$(this).height()});
 			    });
-
+		        
 
 	        	$('ul[data-nav-for="' + nav_id + '"]').css({
 	        	    opacity: 1, top: 0
